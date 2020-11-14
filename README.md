@@ -1,6 +1,24 @@
-# Getting Started with Create React App
+# giphy-browser
+
+A simple GIF browser using the Giphy API, built in React.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Design Decisions
+
+* I'm relatively new to React, having mostly worked in the Ember framework, so I tried to use well-worn patterns and libraries as much as possible. I used create-react-app as this seems to be the simplest, most common approach.
+* I went with a fixed-height flexbox approach for the grid of GIFs. Since GIFs are of many different aspect ratios, there is no way to display them on a regular grid without truncating them. While it is possible to use each GIF's unadulterated aspect ratio and fill each row out to 100% width, this can result in disproportionately large or small thumbnails. I opted for a simpler approach, and I quite like the visual contrast of the fixed heights with the staggered horizontal positioning.
+* I wanted to prevent reflows when the GIF images are loading. To do this, I used the width and height provided from the API to make a placeholder image. 
+
+## Ways to Improve and Expand
+
+There are several ways this project could be improved with more time:
+* Add linting
+* Decouple the API calls from the components
+* Add a store for preserving the GiphyBrowser state (this could be Redux). This would enable the back button from GifDetail to GiphyBrowser to preserve the scroll position and results set. The current implementation has to re-load all state when the back button is pressed.
+* If the last loaded row still has space for at least one more thumbnail, loading new content causes a jump in the positioning of the already loaded thumbnails in the row. This could be solved by limiting the displayed results to only full rows when there are still unloaded results.
+* Implement loading and error states
+* Detect slow connections and use still or lower res thumbnails
 
 ## Available Scripts
 
@@ -39,8 +57,3 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
